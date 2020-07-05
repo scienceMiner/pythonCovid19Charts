@@ -90,6 +90,7 @@ ax.set_xlabel('Date')
 ax.set_ylabel('Number of Deaths')
 ax.set_facecolor('whitesmoke')
 
+
 plt.grid()
 
 ###print( data.loc['Spain':'Italy'] )
@@ -104,14 +105,15 @@ casesData4 = casesData3.iloc[34:,:]
 
 #print(casesData4)
 
-casesData5= casesData3.iloc[:, 1:5]
+casesData5= casesData3.iloc[:, 1:2]
 casesData6= casesData5.diff()
 
 print( ' CASES 3 to 5 ')
 
 print(casesData6)
 
-ax = casesData4.plot(lw=1, colormap='jet', marker='.', markersize=4,title='Covid-19 Cases')
+#ax = casesData6.plot(lw=1, colormap='jet', marker='.', markersize=4,title='Covid-19 Cases')
+ax = casesData6.plot.bar()
 ax.set_xlabel('Date')
 ax.set_ylabel('Number of Cases')
 ax.set_facecolor('gainsboro')
