@@ -53,12 +53,18 @@ def barPlot(Country):
 
 #                                    plt.xticks(x, casesData6.index, rotation='vertical')
 barPlot("Italy")
+
+plt.savefig('ItalyCases_Jul20.png')
 barPlot("United Kingdom")
+
+plt.savefig('UKCases_Jul20.png')
 #barPlot("India")
 barPlot("Sweden")
 
 plt.grid
+
 plt.show()
+
 
 
 
