@@ -13,3 +13,5 @@
 ![covid19Deaths_jul20](https://user-images.githubusercontent.com/19819315/87083480-999c7400-c224-11ea-8502-5ba1e89bb6ef.png)
 
 ![3D_uk_vs_germany_july2020](https://user-images.githubusercontent.com/19819315/87987387-7e5c1f00-cad6-11ea-9985-bb73ea8bc8eb.png)
+
+![covid19Deaths_jul20_logScale](https://user-images.githubusercontent.com/19819315/88587907-9f7cbc80-d04e-11ea-86bd-59f37c7f8777.png)
