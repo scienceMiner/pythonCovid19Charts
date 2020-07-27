@@ -28,27 +28,6 @@ plt.rcParams.update({'font.serif': 'Times New Roman',
 #fig = plt.figure();
 #ax = fig.add_subplot(111, projection='3d')
     
-def plot1(country, data, casesData):
-#    print (data)
-    ukData1 = data[ ( data['Country/Region'] == country ) & (  data['Province/State'].isnull() ) ] 
-    countryKey = ukData1.index[0]
-    print (data)
-    droppedData = ukData1.drop(['Province/State','Country/Region','Lat','Long'], axis = 1) 
-    print(droppedData)
-    data5 = droppedData.transpose()
-    print (data5)
-    singleCasesData = casesData[ ( casesData['Country/Region'] == country ) & (  casesData['Province/State'].isnull() ) ] 
-    droppedCasesData = singleCasesData.drop(['Province/State','Country/Region','Lat','Long'], axis = 1) 
-    data6 = droppedCasesData.transpose()
-    ax.plot_trisurf(pd.to_datetime(data5.index.values), data6[countryKey],data5[countryKey]) 
-    
-def plot2(country, data ):
-    ukData15= data[ ( data['Country/Region'] == country ) & (  data['Province/State'].isnull() ) ] 
-    droppedData = ukData15.drop(['Province/State','Country/Region','Lat','Long'], axis = 1) 
-    print(droppedData)
-    data51 = droppedData.transpose()
-    print (data51)
-    data51.plot()
     
     
 def plot3( data ):
@@ -73,11 +52,10 @@ for country in data2.columns:
     print(country)
     
 #print(data2)
-Countries=['Germany','United Kingdom','Spain','Italy','India','Brazil','Russia','Japan','US']
+#Countries=['Germany','United Kingdom','Spain','Italy','India','Brazil','Russia','Japan','US']
+Countries=['United Kingdom','Italy','India','Brazil','Russia','Japan','US']
 
 data3= data2[Countries]
-#data3 = data33.dropna(axis='columns')
-#data4 = data3.loc[data3['Province/State'].isnull()] 
     
 s4=data3.index.values
 
@@ -85,13 +63,14 @@ data4 = data3.iloc[34:,:]
 #data4=data3.loc['1/31/20':'1/31/25'])
 #print(data4)
 
-ax = data4.plot(lw=1, colormap='jet', marker='.', markersize=4,title='Covid-19 Deaths')#.set_xlabel('Date').set_ylabel('Number of Cases')
+ax = data4.plot(lw=1, colormap='jet', marker='.', markersize=4,title='Covid-19 Deaths - LOG Scale')#.set_xlabel('Date').set_ylabel('Number of Cases')
 ax.set_xlabel('Date')
 ax.set_ylabel('Number of Deaths')
 ax.set_facecolor('whitesmoke')
 
 plt.grid()
-plt.savefig('covid19Deaths_jul20')
+plt.yscale('log')
+plt.savefig('covid19Deaths_jul20_logScale')
 ###print( data.loc['Spain':'Italy'] )
 
 casesData = pd.read_csv("/Users/ethancollopy/dev/git/data/COVID19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"  , index_col='Country/Region') 
@@ -111,12 +90,14 @@ print( ' CASES 3 to 5 ')
 
 print(casesData6)
 
-ax = casesData4.plot(lw=1, colormap='jet', marker='.', markersize=4,title='Covid-19 Cases')
+ax = casesData4.plot(lw=1, colormap='jet', marker='.', markersize=4,title='Covid-19 Cases - LOG scale')
 ax.set_xlabel('Date')
 ax.set_ylabel('Number of Cases')
 ax.set_facecolor('gainsboro')
 
 plt.grid()
+plt.yscale('log')
+plt.savefig('covid19Cases_jul20_logScale')
 plt.show()
 
 
