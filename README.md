@@ -1,4 +1,4 @@
-# ercPython - Python Data Analysis Chart Repo
+# ercPython - Python JH COVID-19 Data Analysis Chart Repo
 
 * covid-2d plot requires downloads to a local area for the Johns Hopkins COVID-19 data - then update path
   * read_csv("PATH ... csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"  
@@ -15,3 +15,7 @@
 ![3D_uk_vs_germany_july2020](https://user-images.githubusercontent.com/19819315/87987387-7e5c1f00-cad6-11ea-9985-bb73ea8bc8eb.png)
 
 ![covid19Deaths_jul20_logScale](https://user-images.githubusercontent.com/19819315/88587907-9f7cbc80-d04e-11ea-86bd-59f37c7f8777.png)
+
+![Covid19_NaiveCaseExtrap_Aug20](https://user-images.githubusercontent.com/19819315/89340228-543e5b80-d697-11ea-845c-c7e8df7308c8.png)
+
+![Covid19_NaiveDeathExtrap_Aug20](https://user-images.githubusercontent.com/19819315/89340237-56a0b580-d697-11ea-8a0a-1454aed33a5d.png)
