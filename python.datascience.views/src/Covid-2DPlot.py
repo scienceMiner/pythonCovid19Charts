@@ -91,7 +91,7 @@ ax.set_ylabel('Number of Deaths')
 ax.set_facecolor('whitesmoke')
 
 plt.grid()
-plt.savefig('covid19Deaths_jul20')
+plt.savefig('charts/covid19Deaths_jan21')
 ###print( data.loc['Spain':'Italy'] )
 
 casesData = pd.read_csv("/Users/ethancollopy/dev/git/data/COVID19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"  , index_col='Country/Region') 
@@ -117,6 +117,7 @@ ax.set_ylabel('Number of Cases')
 ax.set_facecolor('gainsboro')
 
 plt.grid()
+plt.savefig('charts/covid19Cases_jan21')
 plt.show()
 
 

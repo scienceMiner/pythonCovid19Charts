@@ -28,7 +28,7 @@ plt.rcParams.update({'font.serif': 'Times New Roman',
 fig = plt.figure();
 
 Country1 = 'United Kingdom'
-Country2 = 'Germany'
+Country2 = 'France'
 
 ax = fig.add_subplot(111, projection='3d')
 
@@ -91,6 +91,6 @@ casesData = pd.read_csv("/Users/ethancollopy/dev/git/data/COVID19/csse_covid_19_
 plot1(Country1, data, casesData )
 plot1(Country2, data, casesData )
 
-plt.savefig('3D_uk_vs_germany_july2020.png')
+plt.savefig('charts/3D_uk_vs_france_jan2021.png')
 plt.show()
 

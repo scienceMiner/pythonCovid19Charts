@@ -49,6 +49,7 @@ ax.set_facecolor('gainsboro')
 
 
 plt.grid()
+plt.savefig('charts/Spain_UK_Jan21.png')
 plt.show()
 
 

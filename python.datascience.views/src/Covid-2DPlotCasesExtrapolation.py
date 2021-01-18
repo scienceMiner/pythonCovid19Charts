@@ -71,9 +71,9 @@ plot(cx, transposedData, 'US', daysToSkip )
 plt.legend(loc="upper left")
 plt.grid()
 
-plt.savefig('Covid19_NaiveCaseExtrap_Aug20.png')
+#plt.('Covid19_NaiveCaseExtrap_Aug20.png')
 
-
+plt.show()
 
 
 
