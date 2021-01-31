@@ -9,13 +9,15 @@
   * read_csv("PATH ... csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv" 
 
 
+
 Two charts using the [UK government experimental data site](https://coronavirus.data.gov.uk/details/download) :
 
 ![UKDeathsOverall_2021-01-31](https://user-images.githubusercontent.com/19819315/106399163-f2c13480-640e-11eb-8206-bf053d679ed6.png)
 
 ![UKDeaths_2021-01-31](https://user-images.githubusercontent.com/19819315/106399167-f94fac00-640e-11eb-9ff4-d2e56cc0461e.png)
 
-The following charts apply the data from the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19.git) :
+
+The following charts use the data from the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19.git) :
 
 ![UKCases_Jul20](https://user-images.githubusercontent.com/19819315/87074443-c6e22580-c216-11ea-860d-313dc14fffb2.png)
 
