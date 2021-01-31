@@ -15,6 +15,8 @@ Two charts using the [UK government experimental data site](https://coronavirus.
 
 ![UKDeaths_2021-01-31](https://user-images.githubusercontent.com/19819315/106399167-f94fac00-640e-11eb-9ff4-d2e56cc0461e.png)
 
+The following charts apply the data from the [Johns Hopkins Git Repo](https://github.com/CSSEGISandData/COVID-19.git) :
+
 ![UKCases_Jul20](https://user-images.githubusercontent.com/19819315/87074443-c6e22580-c216-11ea-860d-313dc14fffb2.png)
 
 ![covid19Deaths_jul20](https://user-images.githubusercontent.com/19819315/87083480-999c7400-c224-11ea-8502-5ba1e89bb6ef.png)
