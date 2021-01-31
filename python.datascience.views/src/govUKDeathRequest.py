@@ -10,7 +10,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as tick
-from matplotlib.dates import MonthLocator
 
 import datetime
 
@@ -37,7 +36,7 @@ def removeQuotesFromArrayItems(input_array):
     return output_array
 
 def getUrlResponse(regionCode, metricType ):
-    query = {'areaType':'overview', 'metric':metricType,'format':'csv' }
+    query = {'areaType':'region','areaCode':regionCode,'metric':metricType,'format':'csv' }
     response = requests.get('https://api.coronavirus.data.gov.uk/v2/data', params=query )
     #response = requests.get('http://www.google.com', params=query)
     output_array = removeQuotesFromArrayItems(response.text.splitlines())
@@ -65,8 +64,8 @@ def getFileResponse(regionName, metric):
     return responseDF
 
 def turnCumulativeIntoDiffColumn(newDataFrame, metricType, regionTitle ):
-    if metricType == 'cumDeaths28DaysByDeathDate' or metricType == 'cumDeaths28DaysByPublishDate':
-        newDataFrame['diff'] = newDataFrame[metricType].diff(1)
+    if metricType == 'cumDeaths28DaysByDeathDate':
+        newDataFrame['diff'] = newDataFrame[metricType].diff(-1)
         newDataFrame = newDataFrame.drop(columns=[metricType])
         newDataFrame = newDataFrame.rename(columns={ "diff": regionTitle })
         return newDataFrame
@@ -76,8 +75,8 @@ def turnCumulativeIntoDiffColumn(newDataFrame, metricType, regionTitle ):
         
 
 def populateDataframe( newDataFrame , metricType ):
-    if  metricType == 'cumDeaths28DaysByDeathDate' or metricType == 'cumDeaths28DaysByPublishDate':
-        newDataFrame = newDataFrame.sort_index(ascending=True)
+    if  metricType == 'cumDeaths28DaysByDeathDate':
+        newDataFrame = newDataFrame.sort_index(ascending=False)
     newRegionTitle = str(newDataFrame['areaName'][0]).replace(" ","")
     newDataFrame = newDataFrame.drop(columns=['areaType','areaCode','areaName'])
     newDataFrame[[metricType ]] = newDataFrame[[metricType]].apply(pd.to_numeric)
@@ -104,35 +103,6 @@ def formatPlot(ax,date,metricName):
     ax.grid(True)
     ax.set_facecolor('gainsboro')
     ax.tick_params(labelsize=8)
-    
-
-def formatBarPlot(df,ax,date,metricName):
-    if metricName == 'cumDeaths28DaysByDeathDate':
-        ax.set_title(" UK COVID-19 Daily Deaths by Region as of %s" % date)
-        ax.set_ylabel('Number of Deaths')   
-    else:
-        ax.set_title(" UK COVID-19 Daily Cases by Region as of %s" % date)
-        ax.set_ylabel('Number of Cases')   
-    ax.set_xlabel('Date')  
-#    ax.locator_params(nbins=10, axis='x') 
- #   ax.xaxis.set_major_locator(plt.MaxN  Locator(10))
-# Set distance between major ticks (which always have labels)
- #   ax.xaxis.set_major_locator(tick.MultipleLocator(8))
-# Sets distance between minor ticks (which don't have labels)
-#    ax.xaxis.set_minor_locator(tick.MultipleLocator(4))
-
-    #ax.xaxis.set_major_locator(MonthLocator())
-#    ax.set_xticks(df.index[::2])
-#    ax.set_xticklabels(df[::2], rotation=45)
-    ticks = ax.get_xticks()
-    labels = ax.get_xticklabels()
-    n = len(ticks) // 10  # Show 10 ticks.
-    ax.set_xticks(ticks[::20])
-    ax.set_xticklabels(labels[::20], rotation=45)
-    ax.tick_params(labelsize=6)
-    ax.grid(True)
-    ax.set_facecolor('gainsboro')
-   
         
 #--------------------------------------------------------
 # BEGIN CODE
@@ -141,11 +111,11 @@ def formatBarPlot(df,ax,date,metricName):
 today = datetime.date.today()
 print(today)
 metricName = 'cumDeaths28DaysByDeathDate'
-MA = 'Moving Average'
-#metricName = 'cumDeaths28DaysByPublishDate'
 #metricName = 'newCasesByPublishDate'
 
-regions = [ ("United Kingdom","K02000001") ]
+regions = [ ("london","E12000007"), ("southwest","E12000009"), ("eastmidlands","E12000004") , 
+("NorthWest" , "E12000002" ) , ("YorksHum" , "E12000003" ) , ( "SouthEast" , "E12000008"  ) , 
+("NorthEast" , "E12000001" ) , ("EastOfEngland" , "E12000006"  ) , ("WestMidlands" , "E12000005" ) ]
 
 dataframeRegion_Dict = {} 
 
@@ -171,20 +141,19 @@ print(finalDataframe.count)
 #finalDataframe = finalDataframe.drop(finalDataframe.head(40).index,inplace=True) # drop last n rows
 #finalDataframe = finalDataframe.iloc[70:]
 #finalDataframe = finalDataframe.drop(finalDataframe.index[[0,200]])
-finalDataframe[MA] = finalDataframe.rolling(window=7).mean()
-print(finalDataframe)
+
+print(finalDataframe.count)
 #finalDataframe.drop(finalDataframe.tail(3).index,inplace=True) # drop last n rows
 
-ax = finalDataframe.plot.bar( y='UnitedKingdom' )
-finalDataframe.plot( y = MA , ax=ax , color='red' )
-formatBarPlot( finalDataframe, ax, today , metricName)
-ax.legend(["7-day moving average", "United kingdom Deaths"])
+ax = finalDataframe.plot(linewidth = "0.8")
+formatPlot( ax, today , metricName)
+
 #plt.figure(figsize=(11.69,8.27))
 if metricName == 'cumDeaths28DaysByDeathDate':
-    plt.savefig("charts/UKDeathsOverall_%s.pdf" % today , dpi=300 )
+    plt.savefig("charts/UKDeaths_%s.pdf" % today , dpi=300 )
     
 if metricName == 'newCasesByPublishDate':
-    plt.savefig("charts/UKCasesOverall_%s.pdf" % today , dpi=300 )
+    plt.savefig("charts/UKCases_%s.pdf" % today , dpi=300 )
     
 plt.show()
 
