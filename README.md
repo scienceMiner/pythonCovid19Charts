@@ -22,7 +22,7 @@ The following charts use the data from the [COVID-19 Data Repository by the Cent
 In July 2020 :
 ![UKCases_Jul20](https://user-images.githubusercontent.com/19819315/87074443-c6e22580-c216-11ea-860d-313dc14fffb2.png)
 
-During the Second Wave, Feb 2021 :
+And now in Feb 2021 the first wave barely registers vs the second wave :
 ![UKCases_Feb21](https://user-images.githubusercontent.com/19819315/107288248-0c8bf880-6a5b-11eb-8cad-3f7a94ed9cbd.png)
 
 ![covid19Deaths_jul20](https://user-images.githubusercontent.com/19819315/87083480-999c7400-c224-11ea-8502-5ba1e89bb6ef.png)
