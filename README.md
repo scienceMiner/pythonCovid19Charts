@@ -25,7 +25,11 @@ In July 2020 :
 And now in Feb 2021 the first wave barely registers vs the second wave :
 ![UKCases_Feb21](https://user-images.githubusercontent.com/19819315/107288248-0c8bf880-6a5b-11eb-8cad-3f7a94ed9cbd.png)
 
+Deaths, July 2020:
 ![covid19Deaths_jul20](https://user-images.githubusercontent.com/19819315/87083480-999c7400-c224-11ea-8502-5ba1e89bb6ef.png)
+
+Deaths As of Feb 2021:
+![UKCases_Feb21](https://user-images.githubusercontent.com/19819315/107288248-0c8bf880-6a5b-11eb-8cad-3f7a94ed9cbd.png)
 
 ![3D_uk_vs_germany_july2020](https://user-images.githubusercontent.com/19819315/87987387-7e5c1f00-cad6-11ea-9985-bb73ea8bc8eb.png)
 
