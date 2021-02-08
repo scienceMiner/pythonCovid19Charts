@@ -29,7 +29,7 @@ Deaths, July 2020:
 ![covid19Deaths_jul20](https://user-images.githubusercontent.com/19819315/87083480-999c7400-c224-11ea-8502-5ba1e89bb6ef.png)
 
 Deaths As of Feb 2021:
-![UKCases_Feb21](https://user-images.githubusercontent.com/19819315/107288248-0c8bf880-6a5b-11eb-8cad-3f7a94ed9cbd.png)
+![covid19Deaths_feb21](https://user-images.githubusercontent.com/19819315/107291095-845c2200-6a5f-11eb-8fe6-ac672241aaed.png)
 
 ![3D_uk_vs_germany_july2020](https://user-images.githubusercontent.com/19819315/87987387-7e5c1f00-cad6-11ea-9985-bb73ea8bc8eb.png)
 
