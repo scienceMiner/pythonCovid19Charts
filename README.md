@@ -19,7 +19,11 @@ Two charts using the [UK government experimental data site](https://coronavirus.
 
 The following charts use the data from the [COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University](https://github.com/CSSEGISandData/COVID-19.git) :
 
+In July 2020 :
 ![UKCases_Jul20](https://user-images.githubusercontent.com/19819315/87074443-c6e22580-c216-11ea-860d-313dc14fffb2.png)
+
+During the Second Wave, Feb 2021 :
+![UKCases_Feb21](https://user-images.githubusercontent.com/19819315/107288248-0c8bf880-6a5b-11eb-8cad-3f7a94ed9cbd.png)
 
 ![covid19Deaths_jul20](https://user-images.githubusercontent.com/19819315/87083480-999c7400-c224-11ea-8502-5ba1e89bb6ef.png)
 
