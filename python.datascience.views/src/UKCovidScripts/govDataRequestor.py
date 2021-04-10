@@ -181,10 +181,10 @@ formatBarPlot( finalDataframe, ax, today , metricName)
 ax.legend(["7-day moving average", "United kingdom Deaths"])
 #plt.figure(figsize=(11.69,8.27))
 if metricName == 'cumDeaths28DaysByDeathDate':
-    plt.savefig("charts/UKDeathsOverall_%s.png" % today , dpi=300 )
+    plt.savefig("../charts/UKDeathsOverall_%s.png" % today , dpi=300 )
     
 if metricName == 'newCasesByPublishDate':
-    plt.savefig("charts/UKCasesOverall_%s.png" % today , dpi=300 )
+    plt.savefig("../charts/UKCasesOverall_%s.png" % today , dpi=300 )
     
 plt.show()
 
