@@ -7,6 +7,7 @@ Created on 4 May 2020
 
 import pandas as pd 
 import matplotlib.pyplot as plt
+import datetime
 
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
@@ -51,18 +52,22 @@ def barPlot(Country):
         if (i % 5) != 0:
             t.set_visible(False)
 
+
+today = datetime.date.today()
 #                                    plt.xticks(x, casesData6.index, rotation='vertical')
 barPlot("Italy")
+plt.savefig("charts/ItalyCases_%s.png" % today  )
+    
+barPlot("India")
+plt.savefig("charts/IndiaCases_%s.png" % today  )
 
-plt.savefig('ItalyCases_Jul20.png')
 barPlot("United Kingdom")
+plt.savefig("charts/UKCases_%s.png" % today  )
 
-plt.savefig('UKCases_Jul20.png')
-#barPlot("India")
-barPlot("Sweden")
+barPlot("Croatia")
+plt.savefig("charts/CroatiaCases_%s.png" % today  )
 
 plt.grid
-
 plt.show()
 
 
