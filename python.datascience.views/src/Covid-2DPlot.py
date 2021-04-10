@@ -85,13 +85,13 @@ data4 = data3.iloc[34:,:]
 #data4=data3.loc['1/31/20':'1/31/25'])
 #print(data4)
 
-ax = data4.plot(lw=1, colormap='jet', marker='.', markersize=4,title='Covid-19 Deaths')#.set_xlabel('Date').set_ylabel('Number of Cases')
+ax = data4.plot(lw=1, colormap='jet', marker='.', markersize=4,title='Covid-19 Deaths as of April 2021')#.set_xlabel('Date').set_ylabel('Number of Cases')
 ax.set_xlabel('Date')
 ax.set_ylabel('Number of Deaths')
 ax.set_facecolor('whitesmoke')
 
 plt.grid()
-plt.savefig('charts/covid19Deaths_jan21')
+plt.savefig('charts/covid19Deaths_apr21')
 ###print( data.loc['Spain':'Italy'] )
 
 casesData = pd.read_csv("/Users/ethancollopy/dev/git/data/COVID19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"  , index_col='Country/Region') 
@@ -111,13 +111,13 @@ print( ' CASES 3 to 5 ')
 
 print(casesData6)
 
-ax = casesData4.plot(lw=1, colormap='jet', marker='.', markersize=4,title='Covid-19 Cases')
+ax = casesData4.plot(lw=1, colormap='jet', marker='.', markersize=4,title='Covid-19 Cases as of April 2021')
 ax.set_xlabel('Date')
 ax.set_ylabel('Number of Cases')
 ax.set_facecolor('gainsboro')
 
 plt.grid()
-plt.savefig('charts/covid19Cases_jan21')
+plt.savefig('charts/covid19Cases_apr21')
 plt.show()
 
 

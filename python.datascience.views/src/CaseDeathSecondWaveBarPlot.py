@@ -56,11 +56,11 @@ def barPlot(Country):
 
 #plt.savefig('ItalyCases_Jul20.png')
 barPlot("United Kingdom")
-plt.savefig('UKCases_Nov20.png')
+plt.savefig('UKCases_Feb21.png')
 
 #barPlot("India")
-barPlot("Sweden")
-plt.savefig('SwedenCases_Nov20.png')
+barPlot("Portugal")
+plt.savefig('PortugalCases_Feb21.png')
 
 plt.grid
 
