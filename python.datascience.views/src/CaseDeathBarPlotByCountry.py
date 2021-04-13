@@ -44,28 +44,35 @@ def barPlot(Country):
     casesData6.columns = ['Cases']
     mergedDF = pd.concat([casesData6,deathData6], axis=1 ) # axis 1 is for the same index 
     ax = mergedDF.plot.bar()
+    MA = 'Moving Average'
+    mergedDF[MA] = casesData6.rolling(window=7).mean()
+    ax2 = mergedDF.plot( y = MA, ax=ax , color='red' , label='_nolegend_' )
+ #   mergedDF.xticks(rotation='vertical')
+  #  ax2.axes.xaxis.set_visible(False)
     ax.set_title(" %s COVID-19 Cases & Deaths" %Country)
     ax.set_xlabel('Date')   
     ax.set_ylabel('Number of Cases')
     ax.set_facecolor('gainsboro')
-    for i, t in enumerate(ax.get_xticklabels()):
-        if (i % 5) != 0:
-            t.set_visible(False)
-
+   # ax1.axes.yaxis.set_visible(False)
+    for i, t in enumerate(ax2.get_xticklabels()):
+        if (i % 10) != 0:
+           t.set_visible(False)
+#    mergedDF.MA.plot( ax=ax , color='red' )
+  
 
 today = datetime.date.today()
+#Countries = ['Brazil','India','United Kingdom','Croatia','Greece','Italy','US','Russia','Chile']
+#Countries = ['Germany','Egypt','Mexico','Nigeria']
+Countries = ['Israel']
+
 #                                    plt.xticks(x, casesData6.index, rotation='vertical')
-barPlot("Italy")
-plt.savefig("charts/ItalyCases_%s.png" % today  )
+
+for C in Countries:
+    barPlot(C)
+    fileName = f"charts/{C}Cases_{today}.png"
+    plt.xticks(rotation='vertical')
+    plt.savefig(fileName,format='png',dpi=300)
     
-barPlot("India")
-plt.savefig("charts/IndiaCases_%s.png" % today  )
-
-barPlot("United Kingdom")
-plt.savefig("charts/UKCases_%s.png" % today  )
-
-barPlot("Croatia")
-plt.savefig("charts/CroatiaCases_%s.png" % today  )
 
 plt.grid
 plt.show()
