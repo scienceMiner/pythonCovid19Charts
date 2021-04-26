@@ -41,13 +41,16 @@ def getUrlResponse(regionCode, metricType ):
     #response = requests.get('http://www.google.com', params=query)
     output_array = removeQuotesFromArrayItems(response.text.splitlines())
     npArray = np.array(output_array)
-    print(output_array)
-    npArray2 = np.delete(npArray, 0, axis=1)
+    npArray2 = np.delete(npArray, 3, axis=1)
     newDataFrame = pd.DataFrame( npArray2,    # values
-             index=npArray[:,[0]],     # 1st column as index
-             columns= ['areaType','areaCode','areaName', metricType ]   )
+             index=npArray[:,[3]],     # 1st column as index
+            columns= ['areaCode','areaName','areaType', metricType ]   )  # April 26 so this HARDCODING can ruin the WHOLE THING
+           # columns= ['areaType','areaCode','areaName', metricType ]   )
+    newDataFrame = newDataFrame.iloc[1:] # dropt the first row on April 26 when my work machine is broken help
     newDataFrame.index = newDataFrame.index.map("".join)
-    newDataFrame = newDataFrame.drop(['date'])
+    for col in newDataFrame.columns:
+        print(col)
+    #newDataFrame = newDataFrame.drop(columns=['date'],inplace=True)
     return (newDataFrame,response)
 
 
@@ -89,6 +92,7 @@ def mergeDataFrame(dataframeRegion_Dict,regions):
     for region in regions:
         outputDf = dataframeRegion_Dict[region[0]]
         finalDataframe = pd.merge(finalDataframe, outputDf, left_index=True, right_index=True, how='outer')
+#        print('completed MERGE for region')
     return finalDataframe
 
 
@@ -110,8 +114,8 @@ def formatPlot(ax,date,metricName):
         
 today = datetime.date.today()
 print(today)
-metricName = 'cumDeaths28DaysByDeathDate'
-#metricName = 'newCasesByPublishDate'
+#metricName = 'cumDeaths28DaysByDeathDate'
+metricName = 'newCasesByPublishDate'
 
 regions = [ ("london","E12000007"), ("southwest","E12000009"), ("eastmidlands","E12000004") , 
 ("NorthWest" , "E12000002" ) , ("YorksHum" , "E12000003" ) , ( "SouthEast" , "E12000008"  ) , 
@@ -121,12 +125,12 @@ dataframeRegion_Dict = {}
 
 for region in regions:
     (response,responseOriginal) = getUrlResponse(region[1], metricName )
-   # response = getFileResponse(region[0],metricName)
+# response = getFileResponse(region[0],metricName)
     df = populateDataframe(response, metricName )
-    
+    print(' Region is ',region[0])
     dataframeRegion_Dict[region[0]] = df
     print('save file')
-    saveFileName = str(region[0]) + "_" + str(metricName) + ".csv"
+    saveFileName = str(region[0]) + "_" + str(metricName) + "CHANGEDAPRIL21.csv"
     #targetfile = "/Users/ethancollopy/git/pythonPlotting/python.datascience.views/src/data/{}_{}Data.csv".format(region[0],metricName)   
     targetfile = "/Users/ethancollopy/git/pythonPlotting/python.datascience.views/src/data/{}".format(saveFileName)   
     saveResponseData(targetfile, responseOriginal)
@@ -135,6 +139,8 @@ print(dataframeRegion_Dict.keys())
 
 finalDataframe = mergeDataFrame(dataframeRegion_Dict, regions)
 
+print('lets see the dataframe output ')
+print(finalDataframe.head(10))
 #print(finalDataframe.loc[['2021-01-10']].sum(axis = 1))
 
 print(finalDataframe.count)
@@ -142,7 +148,7 @@ print(finalDataframe.count)
 #finalDataframe = finalDataframe.iloc[70:]
 #finalDataframe = finalDataframe.drop(finalDataframe.index[[0,200]])
 
-print(finalDataframe.count)
+#print(finalDataframe.count)
 #finalDataframe.drop(finalDataframe.tail(3).index,inplace=True) # drop last n rows
 
 finalDataframe = finalDataframe.iloc[:-4]
@@ -150,12 +156,14 @@ finalDataframe = finalDataframe.iloc[:-4]
 ax = finalDataframe.plot(linewidth = "0.8")
 formatPlot( ax, today , metricName)
 
+plt.legend(prop={'size': 6})
+
 #plt.figure(figsize=(11.69,8.27))
 if metricName == 'cumDeaths28DaysByDeathDate':
-    plt.savefig("../charts/UKDeaths_%s.png" % today , dpi=300 )
+    plt.savefig("../charts/UKGOVDeaths_%s.png" % today , dpi=300 )
     
 if metricName == 'newCasesByPublishDate':
-    plt.savefig("../charts/UKCases_%s.png" % today , dpi=300 )
+    plt.savefig("../charts/UKGOVCases_%s.png" % today , dpi=300 )
     
 plt.show()
 

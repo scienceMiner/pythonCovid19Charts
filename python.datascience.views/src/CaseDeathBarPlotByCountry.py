@@ -45,8 +45,11 @@ def barPlot(Country):
     mergedDF = pd.concat([casesData6,deathData6], axis=1 ) # axis 1 is for the same index 
     ax = mergedDF.plot.bar()
     MA = 'Moving Average'
+    MAD = 'Moving Average Deaths'
     mergedDF[MA] = casesData6.rolling(window=7).mean()
     ax2 = mergedDF.plot( y = MA, ax=ax , color='red' , label='_nolegend_' )
+    mergedDF[MAD] = deathData6.rolling(window=7).mean()
+    ax3 = mergedDF.plot( y = MAD, ax=ax , color='yellow' , label='_nolegend_' )
  #   mergedDF.xticks(rotation='vertical')
   #  ax2.axes.xaxis.set_visible(False)
     ax.set_title(" %s COVID-19 Cases & Deaths" %Country)
@@ -62,8 +65,8 @@ def barPlot(Country):
 
 today = datetime.date.today()
 #Countries = ['Brazil','India','United Kingdom','Croatia','Greece','Italy','US','Russia','Chile']
-#Countries = ['Germany','Egypt','Mexico','Nigeria']
-Countries = ['Israel']
+#Countries = ['Brazil','India','Japan','Croatia']
+Countries = ['India']
 
 #                                    plt.xticks(x, casesData6.index, rotation='vertical')
 

@@ -28,7 +28,7 @@ plt.rcParams.update({'font.serif': 'Times New Roman',
 fig = plt.figure();
 
 Country1 = 'United Kingdom'
-Country2 = 'France'
+Country2 = 'Japan'
 
 ax = fig.add_subplot(111, projection='3d')
 
