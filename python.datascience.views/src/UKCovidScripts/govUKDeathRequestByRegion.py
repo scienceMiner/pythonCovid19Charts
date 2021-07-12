@@ -80,6 +80,8 @@ def turnCumulativeIntoDiffColumn(newDataFrame, metricType, regionTitle ):
 def populateDataframe( newDataFrame , metricType ):
     if  metricType == 'cumDeaths28DaysByDeathDate':
         newDataFrame = newDataFrame.sort_index(ascending=False)
+    else:
+        newDataFrame = newDataFrame.sort_index(ascending=True)
     newRegionTitle = str(newDataFrame['areaName'][0]).replace(" ","")
     newDataFrame = newDataFrame.drop(columns=['areaType','areaCode','areaName'])
     newDataFrame[[metricType ]] = newDataFrame[[metricType]].apply(pd.to_numeric)
@@ -101,8 +103,9 @@ def formatPlot(ax,date,metricName):
         ax.set_title(" UK COVID-19 Daily Deaths by Region as of %s" % date)
         ax.set_ylabel('Number of Deaths')   
     else:
-        ax.set_title(" UK COVID-19 Daily Cases by Region as of %s" % date)
-        ax.set_ylabel('Number of Cases')   
+       ax.set_title(" UK COVID-19 Daily Cases by Region as of %s" % date)
+       # ax.set_title(" UK COVID-19 Daily Cases Third Wave by Region as of %s" % date)
+       ax.set_ylabel('Number of Cases')   
     ax.set_xlabel('Date')   
     ax.grid(True)
     ax.set_facecolor('gainsboro')
@@ -145,7 +148,8 @@ print(finalDataframe.head(10))
 
 print(finalDataframe.count)
 #finalDataframe = finalDataframe.drop(finalDataframe.head(40).index,inplace=True) # drop last n rows
-#finalDataframe = finalDataframe.iloc[70:]
+# delete the first 340 days to highlight the third wave
+# finalDataframe = finalDataframe.iloc[340:]
 #finalDataframe = finalDataframe.drop(finalDataframe.index[[0,200]])
 
 #print(finalDataframe.count)

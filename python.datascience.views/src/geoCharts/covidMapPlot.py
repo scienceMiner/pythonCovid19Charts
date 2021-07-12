@@ -39,36 +39,33 @@ print(UNmembership)
     
 
 def geoplotForSingleDay( InputDate, data ):
-    # data29 = data[data['Province/State'].isnull()] 
-    data22 = data.groupby(['Country/Region']).sum()  # group over countries split by region or province
-    #   print(data222['United Kingdom'])
-    data222 = data22.transpose()  
-    data3 = data222.diff()
-    for col in data3.columns:
-        data3.rename(columns={col:cc.convert(col, to='ISO3', not_found=None )}, inplace=True    ) 
-    singleDayForCountries = data3.loc[InputDate]
+    sumByCountry = data.groupby(['Country/Region']).sum()  # group over countries split by region or province
+    data = sumByCountry.transpose()  
+    dataDiff = data.diff()
+    for col in dataDiff.columns:
+        dataDiff.rename(columns={col:cc.convert(col, to='ISO3', not_found=None )}, inplace=True    ) 
+    singleDayForCountries = dataDiff.loc[InputDate]
     singleDayForCountries = pd.to_numeric(singleDayForCountries)
     fig = px.choropleth(singleDayForCountries,  locations=singleDayForCountries.index,
                     color=InputDate, 
                     hover_name=InputDate, # column to add to hover information
                     color_continuous_scale=px.colors.sequential.Plasma )
-    titleText = "Daily Covid Deaths as of {}".format(InputDate)
+    titleText = "Daily Covid Cases as of {}".format(InputDate)
     fig.update_layout(
     title={
         'text': titleText,
         'x': 0.5,
         'xanchor': 'center',
         'yanchor': 'top'})
-
     fig.show()
     
     
 today = datetime.date.today()
 print (today.strftime("%-m/%d/%y"))
 
-#data = pd.read_csv("/Users/ethancollopy/dev/git/data/COVID19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"  , index_col='Country/Region') 
-data = pd.read_csv("/Users/ethancollopy/dev/git/data/COVID19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"  , index_col='Country/Region' ) 
+data = pd.read_csv("/Users/ethancollopy/dev/git/data/COVID19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"  , index_col='Country/Region') 
+#data = pd.read_csv("/Users/ethancollopy/dev/git/data/COVID19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"  , index_col='Country/Region' ) 
 
-geoplotForSingleDay( "4/24/21" ,  data )
+geoplotForSingleDay( "5/18/21" ,  data )
     
 

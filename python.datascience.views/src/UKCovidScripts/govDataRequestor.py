@@ -2,7 +2,6 @@
 Created on 30 Jan 2021
 @author: ethancollopy
 '''
-
 import requests
 import csv
 import ast
@@ -44,11 +43,16 @@ def getUrlResponse(regionCode, metricType ):
     npArray = np.array(output_array)
     print(output_array)
     npArray2 = np.delete(npArray, 0, axis=1)
+    print('deleted something')
+    print(npArray2)
     newDataFrame = pd.DataFrame( npArray2,    # values
-             index=npArray[:,[0]],     # 1st column as index
+             index=npArray[:,[3]],     # 1st column as index - this WAS 0th column but now its 3rd - OUCH
              columns= ['areaType','areaCode','areaName', metricType ]   )
     newDataFrame.index = newDataFrame.index.map("".join)
-    newDataFrame = newDataFrame.drop(['date'])
+#    newDataFrame = newDataFrame.drop(['date'])
+    print('final data frame from getUrlResponse')
+    newDataFrame = newDataFrame.iloc[1:]
+    print(newDataFrame)
     return (newDataFrame,response)
 
 
@@ -76,10 +80,15 @@ def turnCumulativeIntoDiffColumn(newDataFrame, metricType, regionTitle ):
         
 
 def populateDataframe( newDataFrame , metricType ):
-    if  metricType == 'cumDeaths28DaysByDeathDate' or metricType == 'cumDeaths28DaysByPublishDate':
-        newDataFrame = newDataFrame.sort_index(ascending=True)
+    print(newDataFrame)
+#    if  metricType == 'cumDeaths28DaysByDeathDate' or metricType == 'cumDeaths28DaysByPublishDate':
+    newDataFrame = newDataFrame.sort_index(ascending=True)
     newRegionTitle = str(newDataFrame['areaName'][0]).replace(" ","")
+    print('Before column drop with newRegionTitle: %s', newRegionTitle) 
+    print(newDataFrame)
     newDataFrame = newDataFrame.drop(columns=['areaType','areaCode','areaName'])
+    print('After column drop')
+    print(newDataFrame)
     newDataFrame[[metricType ]] = newDataFrame[[metricType]].apply(pd.to_numeric)
     newDataFrame = turnCumulativeIntoDiffColumn(newDataFrame, metricType, newRegionTitle )
     return newDataFrame
@@ -140,10 +149,10 @@ def formatBarPlot(df,ax,date,metricName):
         
 today = datetime.date.today()
 print(today)
-metricName = 'cumDeaths28DaysByDeathDate'
+#metricName = 'cumDeaths28DaysByDeathDate'
 MA = 'Moving Average'
 #metricName = 'cumDeaths28DaysByPublishDate'
-#metricName = 'newCasesByPublishDate'
+metricName = 'newCasesByPublishDate'
 
 regions = [ ("United Kingdom","K02000001") ]
 
@@ -152,10 +161,10 @@ dataframeRegion_Dict = {}
 for region in regions:
     (response,responseOriginal) = getUrlResponse(region[1], metricName )
    # response = getFileResponse(region[0],metricName)
-    df = populateDataframe(response, metricName )
+    df = populateDataframe( response, metricName )
     
     dataframeRegion_Dict[region[0]] = df
-    print('save file')
+    print( 'save file' )
     saveFileName = str(region[0]) + "_" + str(metricName) + ".csv"
     #targetfile = "/Users/ethancollopy/git/pythonPlotting/python.datascience.views/src/data/{}_{}Data.csv".format(region[0],metricName)   
     targetfile = "/Users/ethancollopy/git/pythonPlotting/python.datascience.views/src/data/{}".format(saveFileName)   
@@ -175,7 +184,8 @@ finalDataframe[MA] = finalDataframe.rolling(window=7).mean()
 print(finalDataframe)
 #finalDataframe.drop(finalDataframe.tail(3).index,inplace=True) # drop last n rows
 
-ax = finalDataframe.plot.bar( y='UnitedKingdom' )
+#ax = finalDataframe.plot.bar( y='UnitedKingdom' )
+ax = finalDataframe.plot.bar( )
 finalDataframe.plot( y = MA , ax=ax , color='red' )
 formatBarPlot( finalDataframe, ax, today , metricName)
 ax.legend(["7-day moving average", "United kingdom Deaths"])
