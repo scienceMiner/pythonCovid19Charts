@@ -67,7 +67,7 @@ today = datetime.date.today()
 #Countries = ['Brazil','India','United Kingdom','Croatia','Greece','Italy','US','Russia','Chile']
 #Countries = ['Brazil','India','Japan','Croatia']
 #Countries = ['United Kingdom']
-Countries = ['India']
+Countries = ['Israel']
 
 #                                    plt.xticks(x, casesData6.index, rotation='vertical')
 
