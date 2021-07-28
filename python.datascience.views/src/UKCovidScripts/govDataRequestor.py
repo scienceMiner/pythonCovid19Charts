@@ -149,9 +149,9 @@ def formatBarPlot(df,ax,date,metricName):
         
 today = datetime.date.today()
 print(today)
-#metricName = 'cumDeaths28DaysByDeathDate'
 MA = 'Moving Average'
 #metricName = 'cumDeaths28DaysByPublishDate'
+#metricName = 'cumDeaths28DaysByDeathDate'
 metricName = 'newCasesByPublishDate'
 
 regions = [ ("United Kingdom","K02000001") ]
