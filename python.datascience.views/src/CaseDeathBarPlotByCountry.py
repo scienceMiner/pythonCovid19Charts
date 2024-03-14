@@ -66,10 +66,10 @@ def barPlot(Country):
 today = datetime.date.today()
 #Countries = ['Brazil','India','United Kingdom','Croatia','Greece','Italy','US','Russia','Chile']
 #Countries = ['Brazil','India','Japan','Croatia']
-#Countries = ['United Kingdom']
-Countries = ['Israel']
+#Countries = ['South Africa']
+Countries = ['Germany']
 
-#                                    plt.xticks(x, casesData6.index, rotation='vertical')
+#    plt.xticks(x, casesData6.index, rotation='vertical')
 
 for C in Countries:
     barPlot(C)
